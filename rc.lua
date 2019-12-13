@@ -58,10 +58,10 @@ awful.spawn.with_shell("~/.config/awesome/autorun.sh")
 beautiful.init("~/.config/awesome/themes/energyCalm/theme.lua")
 
 -- {{{ Add some custom stuff
-
 local env = require("env-configuration")
 local keys = require("keys")
 local rules = require("rules")
+
 -- }}}
 
 
@@ -214,7 +214,7 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
+            --mylauncher, -- It's a awesomewm icon with menu
             s.mytaglist,
             s.mypromptbox,
         },
