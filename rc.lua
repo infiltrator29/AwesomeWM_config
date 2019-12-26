@@ -14,8 +14,6 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
--- Custom modules
-local dmenuTasklist = require("modules.dmenuTasklist")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -51,16 +49,15 @@ end
 awful.spawn.with_shell("~/.config/awesome/autorun.sh")
 -- }}}
 
-
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 -- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua") --	DEFAULT THEME
 beautiful.init("~/.config/awesome/themes/energyCalm/theme.lua")
 
 -- {{{ Add some custom stuff
-local env = require("env-configuration")
-local keys = require("keys")
-local rules = require("rules")
+local env = require("modules.env-configuration")
+local keys = require("modules.keys")
+local rules = require("modules.rules")
 
 -- }}}
 
@@ -83,9 +80,9 @@ awful.layout.layouts = {
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier,
     awful.layout.suit.corner.nw,
-    -- awful.layout.suit.corner.ne,
-    -- awful.layout.suit.corner.sw,
-    -- awful.layout.suit.corner.se,
+     --awful.layout.suit.corner.ne,
+     --awful.layout.suit.corner.sw,
+     --awful.layout.suit.corner.se,
 }
 -- }}}
 
@@ -333,4 +330,5 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
 

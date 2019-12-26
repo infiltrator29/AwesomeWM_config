@@ -7,6 +7,6 @@ function run {
     fi
 }
 
+#run wpg -s current.png	 			# set color scheme
 run compton
-run wpg -s current.png	 			# set color scheme
 run setxkbmap -layout "pl" 			# keyboard layout
