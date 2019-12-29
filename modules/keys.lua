@@ -25,7 +25,10 @@ globalkeys = gears.table.join(
     awful.key({"Shift", "Control"}, "Print", function() awful.util.spawn_with_shell("sleep 0.5 && escrotum -s -C") end),    
     --awful.key({ "Shift"         }, "Shift_R", function() kbdcfg:next() end ),
     --awful.key({ "Mod4", "Shift" }, "Shift_R", function() kbdcfg:prev() end ),
-
+    
+    -- Spawn Programms
+    awful.key({ modkey,           }, "b", function () awful.spawn("firefox") end,
+              {description = "open a browser", group = "launcher"}),
 
     awful.key({ modkey, "Control" }, "o",
           function ()
@@ -33,7 +36,6 @@ globalkeys = gears.table.join(
               c.floating = not c.floating end,
           {description = "Toggle floating", group = "Clients"}),
 
-    --awful.key({ modkey,		}, "q", dmenuTasklist.get_tasks),
 
         
     --}}}

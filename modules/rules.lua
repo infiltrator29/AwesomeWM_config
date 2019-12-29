@@ -54,11 +54,11 @@ rules = {
     },
 
      --Set Firefox to always map on the tag named "2" on screen 1.
-     { rule = { class = "Firefox" },
+     { rule = { class = "firefox" },
        properties = { screen = 1, tag = "2" } },
 
     -- Spotify map  on the tag named "3".
-     { rule = { class = "Spotify" },
+     { rule = { class = "[Ss]potify" },
        properties = { screen = 1, tag = "3" } },
 }
 
