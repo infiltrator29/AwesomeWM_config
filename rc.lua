@@ -60,7 +60,7 @@ end
 -- {{{ Variable definitions 
 -- Themes define colours, icons, font and wallpapers.
 -- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua") --	DEFAULT THEME
-beautiful.init(gears.filesystem.get_dir("config") .. "themes/calmwolf/theme.lua")
+beautiful.init(gears.filesystem.get_dir("config") .. "themes/spatialnihilism/theme.lua")
 
 -- {{{ Add some custom stuff
 local env = require("modules.env-configuration")

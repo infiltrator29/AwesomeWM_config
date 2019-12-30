@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/home/infiltrator/.config/wpg/wallpapers/calmwolf.png",
+    "alpha": "",
+
+    "special": {
+        "background": "#0d1014",
+        "foreground": "#bfbfc1",
+        "cursor": "#bfbfc1"
+    },
+    "colors": {
+        "color0": "#0d1014",
+        "color1": "#65666b",
+        "color2": "#75777b",
+        "color3": "#a8193e",
+        "color4": "#880e0e",
+        "color5": "#9e3f57",
+        "color6": "#85868a",
+        "color7": "#bfbfc1",
+        "color8": "#232529",
+        "color9": "#65666b",
+        "color10": "#75777b",
+        "color11": "#a8193e",
+        "color12": "#992444",
+        "color13": "#9e3f57",
+        "color14": "#85868a",
+        "color15": "#bfbfc1"
+    }
+}
