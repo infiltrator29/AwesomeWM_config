@@ -18,6 +18,10 @@ ctrlkey = "Control"
 -- {{{ Key bindings
 globalkeys = gears.table.join(
 
+    --{{{ Debugging 
+    awful.key({"Mod4"}, "d", function() require("naughty").notify{ text = client.focus.border_color } end),
+	--}}}
+
     --{{{ My bindings
     awful.key({}, "Print", function() awful.util.spawn_with_shell("cd ~/Screenshots && sleep 0.5 && escrotum ") end),
     awful.key({"Shift"}, "Print", function() awful.util.spawn_with_shell("cd ~/Screenshots && sleep 0.5 && escrotum -s") end),

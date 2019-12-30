@@ -1,5 +1,5 @@
 ----------------------------------
---  "energyCalm" awesome theme  --
+--   "calmwolf" awesome theme   --
 --       by infiltrator         --
 ----------------------------------
 
@@ -10,7 +10,7 @@ local gears = require("gears")
 
 -- {{{ Main
 local theme = {}
-theme.wallpaper = beautiful.theme_path .. "background/current.png"
+theme.wallpaper = beautiful.theme_path .. "background/calmwolf.png"
 -- theme.wallpaper = "~/Pictures/wallpapers/road.jpg"
 -- }}}
 

@@ -1,3 +1,4 @@
+-- {{{ Requirements
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -13,11 +14,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
-
-
-
-
-
+-- }}}
 
 -- Function to create object in lua - used globally
 -- return the init function of each class
@@ -31,15 +28,7 @@ function class(base)
   return setmetatable({ new = new }, { __call = new, __index = base })
 end
 
-
-
-
-
-
-
-
-
--- {{{ Error handling
+-- {{{ Error handling 
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
@@ -68,15 +57,10 @@ do
     end)
 end
 -- }}}
-
--- {{{ Autostart
-awful.spawn.with_shell("~/.config/awesome/autorun.sh")
--- }}}
-
--- {{{ Variable definitions
+-- {{{ Variable definitions 
 -- Themes define colours, icons, font and wallpapers.
 -- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua") --	DEFAULT THEME
-beautiful.init("~/.config/awesome/themes/energyCalm/theme.lua")
+beautiful.init(gears.filesystem.get_dir("config") .. "themes/calmwolf/theme.lua")
 
 -- {{{ Add some custom stuff
 local env = require("modules.env-configuration")
@@ -108,8 +92,7 @@ awful.layout.layouts = {
      --awful.layout.suit.corner.se,
 }
 -- }}}
-
--- {{{ Menu
+-- {{{ Menu 
 -- Create a launcher widget and a main menu
 myawesomemenu = {
    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
@@ -127,9 +110,7 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
 -- Menubar configuration
 menubar.utils.terminal = env.terminal -- Set the terminal for applications that require it
 -- }}}
-
-
--- {{{ For each screen
+-- {{{ For each screen 
 awful.screen.connect_for_each_screen(function(s) 
 
     -- Wallpaper
@@ -139,20 +120,15 @@ awful.screen.connect_for_each_screen(function(s)
     require("modules.tagnames")(s)
 
     -- Set wibar
-    require("themes.energyCalm.bar")(s)
+    require("themes.calmwolf.bar")(s)
 
 end)
 -- }}}
-
-
-
-
--- {{{ Rules
+-- {{{ Rules 
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = rules
 -- }}}
-
--- {{{ Signals
+-- {{{ Signals 
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
     -- Set the windows at the slave,
@@ -240,5 +216,8 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+-- {{{ Autostart 
+awful.spawn.with_shell("~/.config/awesome/autorun.sh")
+-- }}}
 
-
+-- vim:foldmethod=marker:foldlevel=0
