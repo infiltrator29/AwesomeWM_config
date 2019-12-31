@@ -15,13 +15,14 @@ theme.wallpaper = beautiful.theme_path .. "background/spatialnihilism.jpg"
 -- }}}
 
 -- {{{ Styles
-theme.font      = "sans 8"
+local main_font = "SauceCodePro Nerd Font "
+theme.font      = main_font .. "Black 11"
 
 -- {{{ Colors
 theme.fg_normal  = "#DCDCCC"
 theme.fg_focus   = "#CECEB1"
 theme.fg_urgent  = "#CC9393"
-theme.bg_normal  = "#12151A"
+theme.bg_normal  = "#0F161E"
 theme.bg_focus   = "#34383f"
 theme.bg_urgent  = "#3F3F3F"
 theme.bg_systray = theme.bg_normal
@@ -29,9 +30,9 @@ theme.bg_systray = theme.bg_normal
 
 -- {{{ Borders
 -- theme.border_width  = dpi(5)
-theme.border_width  =  dpi(3)  
-theme.border_normal = "#0A0C0F"
-theme.border_focus  = "#981839"
+theme.border_width  =  dpi(2)  
+theme.border_normal = "#0F161E"
+theme.border_focus  = "#28AC56"
 theme.border_marked = "#CC9393"
 theme.maximized_hide_border = true
 -- }}}
@@ -48,8 +49,10 @@ theme.useless_gap = dpi(0)
 -- {{{ Tasklist
 
 --theme.tasklist_disable_task_name = true 
-theme.tasklist_spacing = dpi(5)
+theme.tasklist_spacing = dpi(3)
 theme.tasklist_shape = gears.shape.rounded_bar
+theme.tasklist_align = "center"
+theme.tasklist_font = main_font .. "Bold 8"
 
 -- }}}
 
@@ -87,11 +90,11 @@ theme.menu_height = dpi(15)
 theme.menu_width  = dpi(100)
 -- }}}
 
--- {{{ Icons
 -- {{{ Taglist
-theme.taglist_squares_sel   = themes_path .. "zenburn/taglist/squarefz.png"
-theme.taglist_squares_unsel = themes_path .. "zenburn/taglist/squarez.png"
---theme.taglist_squares_resize = "false"
+--theme.taglist_squares_sel   = beautiful.theme_path .. "img/taglist/squarez.png"
+--theme.taglist_squares_unsel = beautiful.theme_path .. "img/taglist/squarefz.png"
+theme.taglist_squares_resize = true
+theme.taglist_font = main_font .. "Black 11"
 -- }}}
 
 -- {{{ Misc
@@ -144,7 +147,6 @@ theme.titlebar_maximized_button_focus_active  = themes_path .. "zenburn/titlebar
 theme.titlebar_maximized_button_normal_active = themes_path .. "zenburn/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_inactive  = themes_path .. "zenburn/titlebar/maximized_focus_inactive.png"
 theme.titlebar_maximized_button_normal_inactive = themes_path .. "zenburn/titlebar/maximized_normal_inactive.png"
--- }}}
 -- }}}
 
 return theme

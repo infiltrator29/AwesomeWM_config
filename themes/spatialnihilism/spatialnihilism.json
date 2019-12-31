@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/home/infiltrator/.config/wpg/wallpapers/spatialnihilism.jpg",
+    "alpha": "",
+
+    "special": {
+        "background": "#0F161E",
+        "foreground": "#b2ffff",
+        "cursor": "#b2ffff"
+    },
+    "colors": {
+        "color0": "#0F161E",
+        "color1": "#BC4F4F",
+        "color2": "#28AC56",
+        "color3": "#B8A73A",
+        "color4": "#32504E",
+        "color5": "#953D9E",
+        "color6": "#595A58",
+        "color7": "#86e3c2",
+        "color8": "#1f2e3f",
+        "color9": "#ff5555",
+        "color10": "#26ed6b",
+        "color11": "#fee43b",
+        "color12": "#38706c",
+        "color13": "#cd41db",
+        "color14": "#738066",
+        "color15": "#b2ffff"
+    }
+}

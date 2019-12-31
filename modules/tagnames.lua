@@ -2,6 +2,9 @@ local awful = require("awful")
 local gtable = require("gears.table")
 local beautiful = require("beautiful")
 
+-- Tag names
+tagnames = beautiful.tagnames or { ">_", "" , "", "4", "5", "6", "7", "8", "9"}
+
 -- init table
 local mytagname = class()
 
@@ -17,8 +20,6 @@ function mytagname:init(s)
     l.tile, l.tile, l.tile, l.tile 
   }
 
-  -- Tag names
-  local tagnames = beautiful.tagnames or { "1", "2", "3", "4", "5", "6", "7", "8", "9"}
 
   -- Create tags
   awful.tag.add(tagnames[1], {

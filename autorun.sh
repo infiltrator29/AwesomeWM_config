@@ -7,6 +7,6 @@ function run {
     fi
 }
 
-#run wpg -s current.png	 			# set color scheme
 run compton
+run redshift                    # auto adjust screen temperature for night work
 run setxkbmap -layout "pl" 			# keyboard layout

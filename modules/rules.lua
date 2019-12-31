@@ -1,7 +1,7 @@
 local awful = require("awful")
 local beautiful = require("beautiful")
 local keys = require("modules.keys")
-
+require("modules.tagnames")
 
 rules = {
     -- All clients will match this rule.
@@ -55,11 +55,12 @@ rules = {
 
      --Set Firefox to always map on the tag named "2" on screen 1.
      { rule = { class = "firefox" },
-       properties = { screen = 1, tag = "2" } },
+       properties = { screen = 1, tag = tagnames[2]} },
 
     -- Spotify map  on the tag named "3".
      { rule = { class = "[Ss]potify" },
-       properties = { screen = 1, tag = "3" } },
+       properties = { screen = 1, tag = tagnames[3]} },
+
 }
 
 return rules
