@@ -16,7 +16,7 @@ function mytagname:init(s)
   -- local layouts = { l.max, l.floating, l.max, l.max , l.tile,
   --     l.max, l.max, l.max, l.floating, l.tile}
   local layouts = { 
-    l.tile.left, l.tile, l.max.fullscreen, l.tile , l.tile,
+    l.tile.left, l.max, l.max.fullscreen, l.tile , l.tile,
     l.tile, l.tile, l.tile, l.tile 
   }
 

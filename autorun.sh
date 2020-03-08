@@ -9,4 +9,3 @@ function run {
 
 run compton
 run redshift                    # auto adjust screen temperature for night work
-run setxkbmap -layout "pl" 			# keyboard layout
