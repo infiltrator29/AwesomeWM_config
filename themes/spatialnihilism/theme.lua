@@ -50,7 +50,7 @@ theme.useless_gap = dpi(0)
 
 --theme.tasklist_disable_task_name = true 
 theme.tasklist_spacing = dpi(3)
-theme.tasklist_shape = gears.shape.rounded_bar
+--theme.tasklist_shape = gears.shape.rounded_bar
 theme.tasklist_align = "center"
 theme.tasklist_font = main_font .. "Bold 8"
 

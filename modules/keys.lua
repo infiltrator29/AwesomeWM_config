@@ -148,10 +148,7 @@ globalkeys = gears.table.join(
                     history_path = awful.util.get_cache_dir() .. "/history_eval"
                   }
               end,
-              {description = "lua execute prompt", group = "awesome"}),
-    -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "lua execute prompt", group = "awesome"})
 )
 
 keys.clientkeys = gears.table.join(
@@ -228,10 +225,10 @@ awful.key({ modkey, "Mod1", "Control"   }, "l",   function (c) c:relative_move( 
     
     -- {{{ Resize windows in tiling (custom)
 
-    awful.key({ modkey, "Mod1"    }, "Right",     function () awful.tag.incmwfact( 0.01)    end),
-    awful.key({ modkey, "Mod1"    }, "Left",     function () awful.tag.incmwfact(-0.01)    end),
-    awful.key({ modkey, "Mod1"    }, "Down",     function () awful.client.incwfact( 0.01)    end),
-    awful.key({ modkey, "Mod1"    }, "Up",     function () awful.client.incwfact(-0.01)    end)
+    awful.key({ modkey, "Control", "Shift"    }, "l",     function () awful.tag.incmwfact( 0.01)    end),
+    awful.key({ modkey, "Control", "Shift"    }, "h",     function () awful.tag.incmwfact(-0.01)    end),
+    awful.key({ modkey, "Control", "Shift"    }, "j",     function () awful.client.incwfact( 0.03)    end),
+    awful.key({ modkey, "Control", "Shift"    }, "k",     function () awful.client.incwfact(-0.03)    end)
 
     -- }}}
 )

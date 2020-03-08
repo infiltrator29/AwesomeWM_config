@@ -3,7 +3,7 @@ local gtable = require("gears.table")
 local beautiful = require("beautiful")
 
 -- Tag names
-tagnames = beautiful.tagnames or { ">_", "" , "", "4", "5", "6", "7", "8", "9"}
+tagnames = beautiful.tagnames or { ">_", "" , "", "4", "5", "6", "7", "8", "פֿ"}
 
 -- init table
 local mytagname = class()
