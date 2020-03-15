@@ -7,13 +7,20 @@ local mywallpaper = class()
 local function set_wallpaper(s)
     if beautiful.wallpaper then
         local wallpaper = beautiful.wallpaper
-        -- If wallpaper is a function, call it with the screen
-        if type(wallpaper) == "function" then
-            wallpaper = wallpaper(s)
-        end
 
-        -- Setting wallpaper
-        gears.wallpaper.maximized(wallpaper, s, true)
+        if beautiful.animated_wallpaper then
+            local animate = "pkill xwinwrap; sleep 0.1; xwinwrap -ni -fs -un -s -st -sp -nf -ov -- mpv -wid WID --loop=inf --mute=yes " .. wallpaper .. " &"
+            awful.spawn.with_shell(animate)
+        else
+            local stopAnimate = "pkill xwinwrap &"
+            awful.spawn.with_shell(stopAnimate)
+            -- If wallpaper is a function, call it with the screen
+            if type(wallpaper) == "function" then
+                wallpaper = wallpaper(s)
+            end
+            -- Setting wallpaper
+            gears.wallpaper.maximized(wallpaper, s, true)
+        end
     end
 end
 

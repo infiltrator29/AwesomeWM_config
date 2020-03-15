@@ -7,5 +7,7 @@ function run {
     fi
 }
 
+run 'setxkbmap -layout "pl" '
 run compton
 run redshift                    # auto adjust screen temperature for night work
+

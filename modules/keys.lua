@@ -23,8 +23,8 @@ globalkeys = gears.table.join(
 	--}}}
 
     --{{{ My bindings
-    awful.key({}, "Print", function() awful.util.spawn_with_shell("cd ~/screenshots && sleep 0.5 && escrotum ") end),
-    awful.key({"Shift"}, "Print", function() awful.util.spawn_with_shell("cd ~/screenshots && sleep 0.5 && escrotum -s") end),
+    awful.key({}, "Print", function() awful.util.spawn_with_shell("cd ~/pix/screenshots && sleep 0.5 && escrotum ") end),
+    awful.key({"Shift"}, "Print", function() awful.util.spawn_with_shell("cd ~/pix/screenshots && sleep 0.5 && escrotum -s") end),
     awful.key({"Control"}, "Print", function() awful.util.spawn_with_shell("sleep 0.5 && escrotum -C") end),
     awful.key({"Shift", "Control"}, "Print", function() awful.util.spawn_with_shell("sleep 0.5 && escrotum -s -C") end),    
     --awful.key({ "Shift"         }, "Shift_R", function() kbdcfg:next() end ),
