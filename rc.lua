@@ -112,11 +112,6 @@ menubar.utils.terminal = env.terminal -- Set the terminal for applications that 
 -- }}}
 -- {{{ For each screen 
 awful.screen.connect_for_each_screen(function(s) 
-    -- Set default padding
-    s.padding = {
-        left = 0, right = 0, top = 0, bottom = 0
-    }
-
     -- Wallpaper
     require("modules.wallpaper")(s)
 
@@ -202,14 +197,6 @@ client.connect_signal("request::titlebars", function(c)
             c.floating = float
         end
     end)
-
-    --awful.tag.attached_connect_signal(s, "property::layout", function (t)
-    --    local float = t.layout.name == "floating"
-	--for _,c in pairs(t:clients()) do
-	--    c.floating = float
-	--end
-    --end)
-
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
@@ -219,6 +206,11 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+
+-- Set screen padding for each tag separatly
+awful.tag.attached_connect_signal(s, "property::selected", function(t)
+    awful.screen.focused().padding = tagpadding[t.name]
+end)
 -- }}}
 -- {{{ Autostart 
 awful.spawn.with_shell("~/.config/awesome/autorun.sh")

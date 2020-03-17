@@ -59,7 +59,14 @@ rules = {
 
     -- Spotify map  on the tag named "3".
      { rule = { class = "[Ss]potify" },
-       properties = { screen = 1, tag = tagnames[4]} },
+       properties = { screen = 1, tag = tagnames[5]} },
+
+    -- Rules for Gimp
+     { rule = { class = "Gimp" },
+       properties = { screen = 1, tag = tagnames[4], switchtotag = true} },
+    -- Rules for Inkscape
+     { rule = { class = "Inkscape" },
+       properties = { screen = 1, tag = tagnames[4], switchtotag = true} },
 
 }
 

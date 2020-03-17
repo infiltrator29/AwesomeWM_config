@@ -2,6 +2,7 @@ local gears = require("gears")
 local awful = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup")
 local env = require("modules.env-configuration")
+local inspect = require("inspect")
 
 -- Custom modules
 --local dmenuTasklist = require("modules.dmenuTasklist")
@@ -18,32 +19,30 @@ ctrlkey = "Control"
 -- {{{ Key bindings
 globalkeys = gears.table.join(
 
-    --{{{ Debugging 
-    awful.key({"Mod4"}, "d", function() require("naughty").notify{ text = require('inspect')(awful.screen.focused().padding)} end),
-	--}}}
+--{{{ Debugging 
+    awful.key({"Mod4"}, "d", function() require("naughty").notify{ text = inspect(awful.screen.focused().selected_tags)} end),
+--}}}
 
-    --{{{ My bindings
+--{{{ My bindings (custom)
     awful.key({}, "Print", function() awful.util.spawn_with_shell("cd ~/pix/screenshots && sleep 0.5 && escrotum ") end),
     awful.key({"Shift"}, "Print", function() awful.util.spawn_with_shell("cd ~/pix/screenshots && sleep 0.5 && escrotum -s") end),
     awful.key({"Control"}, "Print", function() awful.util.spawn_with_shell("sleep 0.5 && escrotum -C") end),
     awful.key({"Shift", "Control"}, "Print", function() awful.util.spawn_with_shell("sleep 0.5 && escrotum -s -C") end),    
     
-    -- Spawn Programms
+-- Spawn Programms
     awful.key({ modkey,           }, "b", function () awful.spawn("firefox") end,
               {description = "open a browser", group = "launcher"}),
 
         
-    --}}}
+--}}}
      
 -- {{{ Change gap size (custom)
-    
     awful.key({ modkey,           }, "[",      function () awful.tag.incgap(-1) end, {description = "change useless gap", group = "layout"}),
     awful.key({ modkey,           }, "]",      function () awful.tag.incgap(1) end, {description = "change useless gap", group = "layout"}),
 
 
     awful.key({ modkey, "Shift"     }, "[",      function () awful.tag.incgap(-9) end, {description = "change useless gap (faster)", group = "layout"}),
     awful.key({ modkey, "Shift"     }, "]",      function () awful.tag.incgap(9) end, {description = "change useless gap (faster)", group = "layout"}),
-
 -- }}}
 -- {{{ Change padding size (custom)
 	awful.key({ modkey, "Control"     }, "[",      function ()
@@ -52,18 +51,41 @@ globalkeys = gears.table.join(
         for k,p in pairs(awful.screen.focused().padding) do
             if p>0 then p = p-10 end paddings[k] = p
         end
+
+        local tag = awful.screen.focused().selected_tag.name
+        tagpadding[tag] = paddings
         
         awful.screen.focused().padding = paddings
     end, {description = "change screen padding", group = "layout"}),
+
 	awful.key({ modkey, "Control"     }, "]",      function ()
         local paddings = {}
-        
         for k,p in pairs(awful.screen.focused().padding) do
             p = p+10 paddings[k] = p
         end
+
+        local tag = awful.screen.focused().selected_tag.name
+        tagpadding[tag] = paddings
         
         awful.screen.focused().padding = paddings
     end, {description = "change screen padding", group = "layout"}),
+-- }}}
+
+-- {{{ Rename tag
+    awful.key({ modkey,  "Shift"   }, "r",   function ()
+		awful.prompt.run {
+			prompt       = "New tag name: ",
+			textbox      = awful.screen.focused().mypromptbox.widget,
+			exe_callback = function(new_name)
+				if not new_name or #new_name == 0 then return end
+
+				local t = awful.screen.focused().selected_tag
+				if t then
+					t.name = new_name
+				end
+			end
+		}
+	end, {description = "rename tag", group = "tag"}),
 -- }}}
 
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
@@ -207,7 +229,6 @@ keys.clientkeys = gears.table.join(
 
 
 -- {{ Move windows (custom)
-
     awful.key({ modkey, "Mod1"   }, "j",   function (c) c:relative_move(  0,  20,   0,   0) end, {description = "move window down", group = "client"}),
     awful.key({ modkey, "Mod1"   }, "k",     function (c) c:relative_move(  0, -20,   0,   0) end, {description = "move window up", group = "client"}),
     awful.key({ modkey, "Mod1"   }, "h",   function (c) c:relative_move(-20,   0,   0,   0) end, {description = "move window left", group = "client"}),
@@ -217,12 +238,10 @@ keys.clientkeys = gears.table.join(
     awful.key({ modkey, "Mod1", "Shift"   }, "j",   function (c) c:relative_move(  0,  50,   0,   0) end, {description = "move window", group = "client"}),
     awful.key({ modkey, "Mod1", "Shift"   }, "k",     function (c) c:relative_move(  0, -50,   0,   0) end, {description = "move window", group = "client"}),
     awful.key({ modkey, "Mod1", "Shift"   }, "l",  function (c) c:relative_move( 50,   0,   0,   0) end, {description = "move window", group = "client"}),
-    
 -- }}
     
 
 -- {{{ Resize windows (custom)
-    
     awful.key({ modkey, "Shift"   }, "Next",   function (c) c:relative_move( 20,  20, -40, -40) end, {description = "change window size", group = "client"}),
     awful.key({ modkey, "Shift"   }, "Prior",  function (c) c:relative_move(-20, -20,  40,  40) end, {description = "change window size", group = "client"}),
 
@@ -233,12 +252,10 @@ keys.clientkeys = gears.table.join(
 -- }}}
     
 -- {{{ Resize windows in tiling (custom)
-
     awful.key({ modkey, "Control", "Shift"    }, "h",     function () awful.tag.incmwfact(-0.01)    end, {description = "resize window in tilling", group = "client"}),
     awful.key({ modkey, "Control", "Shift"    }, "j",     function () awful.client.incwfact( 0.03)    end, {description = "resize window in tilling", group = "client"}),
     awful.key({ modkey, "Control", "Shift"    }, "k",     function () awful.client.incwfact(-0.03)    end, {description = "resize window in tilling", group = "client"}),
     awful.key({ modkey, "Control", "Shift"    }, "l",     function () awful.tag.incmwfact( 0.01)    end, {description = "resize window in tilling", group = "client"})
-
 -- }}}
 )
 
