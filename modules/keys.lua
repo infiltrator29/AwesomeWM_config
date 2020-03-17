@@ -19,7 +19,7 @@ ctrlkey = "Control"
 globalkeys = gears.table.join(
 
     --{{{ Debugging 
-    awful.key({"Mod4"}, "d", function() require("naughty").notify{ text = client.focus.border_color } end),
+    awful.key({"Mod4"}, "d", function() require("naughty").notify{ text = require('inspect')(awful.screen.focused().padding)} end),
 	--}}}
 
     --{{{ My bindings
@@ -27,33 +27,44 @@ globalkeys = gears.table.join(
     awful.key({"Shift"}, "Print", function() awful.util.spawn_with_shell("cd ~/pix/screenshots && sleep 0.5 && escrotum -s") end),
     awful.key({"Control"}, "Print", function() awful.util.spawn_with_shell("sleep 0.5 && escrotum -C") end),
     awful.key({"Shift", "Control"}, "Print", function() awful.util.spawn_with_shell("sleep 0.5 && escrotum -s -C") end),    
-    --awful.key({ "Shift"         }, "Shift_R", function() kbdcfg:next() end ),
-    --awful.key({ "Mod4", "Shift" }, "Shift_R", function() kbdcfg:prev() end ),
     
     -- Spawn Programms
     awful.key({ modkey,           }, "b", function () awful.spawn("firefox") end,
               {description = "open a browser", group = "launcher"}),
 
-    awful.key({ modkey, "Control" }, "o",
-          function ()
-          local c = client.focus
-              c.floating = not c.floating end,
-          {description = "Toggle floating", group = "Clients"}),
-
-
         
     --}}}
      
-    -- {{{ Change gap size (custom)
+-- {{{ Change gap size (custom)
     
-    awful.key({ modkey,           }, "[",      function () awful.tag.incgap(-1) end, {description = "decrease useless gap", group = "layout"}),
-    awful.key({ modkey,           }, "]",      function () awful.tag.incgap(1) end, {description = "increase useless gap", group = "layout"}),
+    awful.key({ modkey,           }, "[",      function () awful.tag.incgap(-1) end, {description = "change useless gap", group = "layout"}),
+    awful.key({ modkey,           }, "]",      function () awful.tag.incgap(1) end, {description = "change useless gap", group = "layout"}),
 
 
-    awful.key({ modkey, "Shift"     }, "[",      function () awful.tag.incgap(-9) end, {description = "decrease useless gap (faster)", group = "layout"}),
-    awful.key({ modkey, "Shift"     }, "]",      function () awful.tag.incgap(9) end, {description = "increase useless gap (faster)", group = "layout"}),
+    awful.key({ modkey, "Shift"     }, "[",      function () awful.tag.incgap(-9) end, {description = "change useless gap (faster)", group = "layout"}),
+    awful.key({ modkey, "Shift"     }, "]",      function () awful.tag.incgap(9) end, {description = "change useless gap (faster)", group = "layout"}),
 
-    -- }}}
+-- }}}
+-- {{{ Change padding size (custom)
+	awful.key({ modkey, "Control"     }, "[",      function ()
+        local paddings = {}
+        
+        for k,p in pairs(awful.screen.focused().padding) do
+            if p>0 then p = p-10 end paddings[k] = p
+        end
+        
+        awful.screen.focused().padding = paddings
+    end, {description = "change screen padding", group = "layout"}),
+	awful.key({ modkey, "Control"     }, "]",      function ()
+        local paddings = {}
+        
+        for k,p in pairs(awful.screen.focused().padding) do
+            p = p+10 paddings[k] = p
+        end
+        
+        awful.screen.focused().padding = paddings
+    end, {description = "change screen padding", group = "layout"}),
+-- }}}
 
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
@@ -84,9 +95,9 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
               {description = "swap with previous client by index", group = "client"}),
     awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
-              {description = "focus the next screen", group = "screen"}),
+              {description = "focus the next/previous screen", group = "screen"}),
     awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
-              {description = "focus the previous screen", group = "screen"}),
+              {description = "focus the next/previous screen", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
     awful.key({ modkey,           }, "Tab",
@@ -107,21 +118,21 @@ globalkeys = gears.table.join(
               {description = "quit awesome", group = "awesome"}),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
-              {description = "increase master width factor", group = "layout"}),
+              {description = "increase/decrease  master width factor", group = "layout"}),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
-              {description = "decrease master width factor", group = "layout"}),
+              {description = "increase/decrease master width factor", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
-              {description = "increase the number of master clients", group = "layout"}),
+              {description = "increase/decrease the number of master clients", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1, nil, true) end,
-              {description = "decrease the number of master clients", group = "layout"}),
+              {description = "increase/decrease the number of master clients", group = "layout"}),
     awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1, nil, true)    end,
-              {description = "increase the number of columns", group = "layout"}),
+              {description = "increase/decrease the number of columns", group = "layout"}),
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
-              {description = "decrease the number of columns", group = "layout"}),
+              {description = "increase/decrease the number of columns", group = "layout"}),
     awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
-              {description = "select next", group = "layout"}),
+              {description = "select next/previous", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
-              {description = "select previous", group = "layout"}),
+              {description = "select  next/previous", group = "layout"}),
 
     awful.key({ modkey, "Control" }, "n",
               function ()
@@ -195,42 +206,40 @@ keys.clientkeys = gears.table.join(
         {description = "(un)maximize horizontally", group = "client"}),
 
 
-    -- {{ Move windows (custom)
+-- {{ Move windows (custom)
 
     awful.key({ modkey, "Mod1"   }, "j",   function (c) c:relative_move(  0,  20,   0,   0) end, {description = "move window down", group = "client"}),
     awful.key({ modkey, "Mod1"   }, "k",     function (c) c:relative_move(  0, -20,   0,   0) end, {description = "move window up", group = "client"}),
     awful.key({ modkey, "Mod1"   }, "h",   function (c) c:relative_move(-20,   0,   0,   0) end, {description = "move window left", group = "client"}),
     awful.key({ modkey, "Mod1"   }, "l",  function (c) c:relative_move( 20,   0,   0,   0) end, {description = "move window right", group = "client"}),
 
-    awful.key({ modkey, "Mod1", "Shift"   }, "j",   function (c) c:relative_move(  0,  50,   0,   0) end, {description = "move window down", group = "client"}),
-    awful.key({ modkey, "Mod1", "Shift"   }, "k",     function (c) c:relative_move(  0, -50,   0,   0) end, {description = "move window up", group = "client"}),
-    awful.key({ modkey, "Mod1", "Shift"   }, "h",   function (c) c:relative_move(-50,   0,   0,   0) end, {description = "move window left", group = "client"}),
-    awful.key({ modkey, "Mod1", "Shift"   }, "l",  function (c) c:relative_move( 50,   0,   0,   0) end, {description = "move window right", group = "client"}),
+    awful.key({ modkey, "Mod1", "Shift"   }, "h",   function (c) c:relative_move(-50,   0,   0,   0) end, {description = "move window", group = "client"}),
+    awful.key({ modkey, "Mod1", "Shift"   }, "j",   function (c) c:relative_move(  0,  50,   0,   0) end, {description = "move window", group = "client"}),
+    awful.key({ modkey, "Mod1", "Shift"   }, "k",     function (c) c:relative_move(  0, -50,   0,   0) end, {description = "move window", group = "client"}),
+    awful.key({ modkey, "Mod1", "Shift"   }, "l",  function (c) c:relative_move( 50,   0,   0,   0) end, {description = "move window", group = "client"}),
     
-    -- }}
+-- }}
     
 
-    -- {{{ Resize windows (custom)
+-- {{{ Resize windows (custom)
     
-    awful.key({ modkey, "Shift"   }, "Next",   function (c) c:relative_move( 20,  20, -40, -40) end, {description = "increase window size", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "Prior",  function (c) c:relative_move(-20, -20,  40,  40) end, {description = "decrease window size", group = "client"}),
+    awful.key({ modkey, "Shift"   }, "Next",   function (c) c:relative_move( 20,  20, -40, -40) end, {description = "change window size", group = "client"}),
+    awful.key({ modkey, "Shift"   }, "Prior",  function (c) c:relative_move(-20, -20,  40,  40) end, {description = "change window size", group = "client"}),
 
-awful.key({ modkey, "Mod1", "Control"    }, "j",   function (c) c:relative_move( 0, 20, 0, -40) end, {description = "decrease window height", group = "client"}),
-awful.key({ modkey, "Mod1", "Control"  }, "k",   function (c) c:relative_move( 0, -20, 0, 40) end, {description = "increase window height", group = "client"}),
-awful.key({ modkey, "Mod1", "Control"  }, "h",   function (c) c:relative_move( 20, 0, -40, 0) end, {description = "decrease window width", group = "client"}),
-awful.key({ modkey, "Mod1", "Control"   }, "l",   function (c) c:relative_move( -20, 0, 40, 0) end, {description = "increase window width", group = "client"}),
-
-
-    -- }}}
+    awful.key({ modkey, "Mod1", "Control"    }, "j",   function (c) c:relative_move( 0, 20, 0, -40) end, {description = "change window height", group = "client"}),
+    awful.key({ modkey, "Mod1", "Control"  }, "k",   function (c) c:relative_move( 0, -20, 0, 40) end, {description = "change window height", group = "client"}),
+    awful.key({ modkey, "Mod1", "Control"  }, "h",   function (c) c:relative_move( 20, 0, -40, 0) end, {description = "change window width", group = "client"}),
+    awful.key({ modkey, "Mod1", "Control"   }, "l",   function (c) c:relative_move( -20, 0, 40, 0) end, {description = "change window width", group = "client"}),
+-- }}}
     
-    -- {{{ Resize windows in tiling (custom)
+-- {{{ Resize windows in tiling (custom)
 
-    awful.key({ modkey, "Control", "Shift"    }, "l",     function () awful.tag.incmwfact( 0.01)    end),
-    awful.key({ modkey, "Control", "Shift"    }, "h",     function () awful.tag.incmwfact(-0.01)    end),
-    awful.key({ modkey, "Control", "Shift"    }, "j",     function () awful.client.incwfact( 0.03)    end),
-    awful.key({ modkey, "Control", "Shift"    }, "k",     function () awful.client.incwfact(-0.03)    end)
+    awful.key({ modkey, "Control", "Shift"    }, "h",     function () awful.tag.incmwfact(-0.01)    end, {description = "resize window in tilling", group = "client"}),
+    awful.key({ modkey, "Control", "Shift"    }, "j",     function () awful.client.incwfact( 0.03)    end, {description = "resize window in tilling", group = "client"}),
+    awful.key({ modkey, "Control", "Shift"    }, "k",     function () awful.client.incwfact(-0.03)    end, {description = "resize window in tilling", group = "client"}),
+    awful.key({ modkey, "Control", "Shift"    }, "l",     function () awful.tag.incmwfact( 0.01)    end, {description = "resize window in tilling", group = "client"})
 
-    -- }}}
+-- }}}
 )
 
 -- Bind all key numbers to tags.

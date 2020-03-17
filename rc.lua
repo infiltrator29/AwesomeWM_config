@@ -23,7 +23,7 @@ local function new(self, ...)
   return instance:init(...) or instance
 end
 
--- Function to create object in lua - used globally
+-- Function to create objects in lua - used globally
 function class(base)
   return setmetatable({ new = new }, { __call = new, __index = base })
 end
@@ -59,8 +59,8 @@ end
 -- }}}
 -- {{{ Variable definitions 
 -- Themes define colours, icons, font and wallpapers.
--- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua") --	DEFAULT THEME
-beautiful.init(gears.filesystem.get_dir("config") .. "themes/spatialnihilism/theme.lua")
+local mytheme = require("modules.theme_loader")
+beautiful.init( mytheme() )
 
 -- {{{ Add some custom stuff
 local env = require("modules.env-configuration")
@@ -112,6 +112,10 @@ menubar.utils.terminal = env.terminal -- Set the terminal for applications that 
 -- }}}
 -- {{{ For each screen 
 awful.screen.connect_for_each_screen(function(s) 
+    -- Set default padding
+    s.padding = {
+        left = 0, right = 0, top = 0, bottom = 0
+    }
 
     -- Wallpaper
     require("modules.wallpaper")(s)

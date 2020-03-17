@@ -19,7 +19,12 @@ local function set_wallpaper(s)
                 wallpaper = wallpaper(s)
             end
             -- Setting wallpaper
-            gears.wallpaper.maximized(wallpaper, s, true)
+            -- (and check if solid color)
+            if beautiful.solid_background then
+               gears.wallpaper.set(wallpaper) 
+           else
+               gears.wallpaper.maximized(wallpaper, s, true)
+           end
         end
     end
 end

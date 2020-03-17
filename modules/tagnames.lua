@@ -26,14 +26,15 @@ function mytagname:init(s)
     layout = layouts[1],
     screen = s,
     gap_single_client  = true,
-    gap = 27,
+    gap = 9,
     selected = true,
   })
 
   awful.tag.add(tagnames[2], {
     layout = layouts[2],
     screen = s,
-    gap_single_client  = false,
+    gap = 18,
+    gap_single_client = true,
   })
 
   awful.tag.add(tagnames[3], {
