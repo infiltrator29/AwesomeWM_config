@@ -44,6 +44,7 @@ tagpadding[tagnames[1]] = {left = 80, right = 80, top = 80, bottom = 80}
     screen = s,
     gap = 18,
     gap_single_client = true,
+    master_width_factor = 0.75,
   })
 
   awful.tag.add(tagnames[3], {
