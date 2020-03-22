@@ -1,6 +1,7 @@
 local awful = require("awful")
 local beautiful = require("beautiful")
 local keys = require("modules.keys")
+local helpers = require("modules.helpers")
 require("modules.tagnames")
 
 rules = {
@@ -67,7 +68,24 @@ rules = {
     -- Rules for Inkscape
      { rule = { class = "Inkscape" },
        properties = { screen = 1, tag = tagnames[4], switchtotag = true} },
+    -- Rules for Discord
+     { rule = { class = "discord" },
+       properties = { screen = 1, tag = tagnames[3]} },
+
+    -- support for run St in floating - bad solution, pls change me:
+     { rule = { class = "St" },
+     callback = function(c)
+         -- floating_flag is set in modules/keys.lua
+         if floating_flag then
+             for k,gravity in pairs(helpers.gravity({0, 0, 25, 25})) do
+                 c[k] = gravity
+             end
+             awful.placement.centered(c)
+         end
+         floating_flag = false
+     end},
 
 }
+
 
 return rules

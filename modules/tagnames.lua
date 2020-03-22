@@ -24,7 +24,7 @@ function mytagname:init(s)
   -- local layouts = { l.max, l.floating, l.max, l.max , l.tile,
   --     l.max, l.max, l.max, l.floating, l.tile}
   local layouts = { 
-    l.tile.left, l.max, l.max.fullscreen, l.max.fullscreen, l.max.fullscreen,
+    l.tile.left, l.tile, l.max.fullscreen, l.max.fullscreen, l.max.fullscreen,
     l.tile, l.tile, l.tile, l.tile 
   }
 
@@ -37,6 +37,7 @@ function mytagname:init(s)
     gap = 9,
     selected = true,
   })
+tagpadding[tagnames[1]] = {left = 80, right = 80, top = 80, bottom = 80}
 
   awful.tag.add(tagnames[2], {
     layout = layouts[2],

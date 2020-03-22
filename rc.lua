@@ -181,22 +181,7 @@ client.connect_signal("request::titlebars", function(c)
         layout = wibox.layout.align.horizontal
     }
 
-    awful.titlebar.hide(c)
-    
-    client.connect_signal("property::floating", function (c)
-        if c.floating then
-	    awful.titlebar.show(c)
-	else
-	    awful.titlebar.hide(c)
-	end
-    end)
-
-    awful.tag.attached_connect_signal(s, "property::layout", function (t)
-        local float = t.layout.name == "floating"
-        for _,c in pairs(t:clients()) do
-            c.floating = float
-        end
-    end)
+    --awful.titlebar.hide(c)
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
@@ -211,10 +196,14 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 awful.tag.attached_connect_signal(s, "property::selected", function(t)
     awful.screen.focused().padding = tagpadding[t.name]
 end)
+    -- Additional: Set padding for current tag
+    local current_tag = awful.screen.focused().selected_tag
+    awful.screen.focused().padding = tagpadding[current_tag.name]
 -- }}}
 -- {{{ Autostart 
 awful.spawn.with_shell("~/.config/awesome/autorun.sh")
 -- }}}
+
 
 
 

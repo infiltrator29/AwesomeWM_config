@@ -3,6 +3,7 @@ local awful = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup")
 local env = require("modules.env-configuration")
 local inspect = require("inspect")
+local helpers = require("modules.helpers")
 
 -- Custom modules
 --local dmenuTasklist = require("modules.dmenuTasklist")
@@ -20,7 +21,7 @@ ctrlkey = "Control"
 globalkeys = gears.table.join(
 
 --{{{ Debugging 
-    awful.key({"Mod4"}, "d", function() require("naughty").notify{ text = inspect(awful.screen.focused().selected_tags)} end),
+    awful.key({"Mod4"}, "d", function() require("naughty").notify{ text = inspect(helpers.gravity({10, 10, 50, 50}))} end),
 --}}}
 
 --{{{ My bindings (custom)
@@ -32,6 +33,13 @@ globalkeys = gears.table.join(
 -- Spawn Programms
     awful.key({ modkey,           }, "b", function () awful.spawn("firefox") end,
               {description = "open a browser", group = "launcher"}),
+    -- bad solution, pls change me:
+    awful.key({ modkey, "Shift"}, "Return", function()
+                -- it's first instance od floating_flag
+                floating_flag = true 
+                awful.spawn(env.terminal)
+            end,
+              {description = "open floating terminal", group = "launcher"}),
 
         
 --}}}
