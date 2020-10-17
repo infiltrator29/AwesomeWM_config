@@ -8,6 +8,8 @@ mytextclock = wibox.widget.textclock()
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
+mybinaryclock = require("widgets.binary_clock")()
+
 local mybar = class()
 
 function mybar:init(s)
@@ -43,8 +45,10 @@ function mybar:init(s)
             s.mytaglist,
             s.mypromptbox,
         },
-        s.mytasklist, -- Middle widget
+        --s.mytasklist, -- Middle widget
+        awful.widget.watch('corona', 900),
         { -- Right widgets
+            --mybinaryclock,
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             wibox.widget.systray(),

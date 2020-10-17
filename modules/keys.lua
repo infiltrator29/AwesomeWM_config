@@ -21,7 +21,11 @@ ctrlkey = "Control"
 globalkeys = gears.table.join(
 
 --{{{ Debugging 
-    awful.key({"Mod4"}, "d", function() require("naughty").notify{ text = inspect(helpers.gravity({10, 10, 50, 50}))} end),
+    awful.key({"Mod4"}, "d", function() awful.spawn.easy_async_with_shell("bash -c 'echo $PATH'", function(stdout, stderr, reason, exit_code)
+    require("naughty").notification { message = stdout..stderr..reason }
+end)
+ end),
+    --awful.key({"Mod4"}, "d", function() require("naughty").notify{ text = inspect(helpers.gravity({10, 10, 50, 50}))} end),
 --}}}
 
 --{{{ My bindings (custom)
@@ -31,6 +35,10 @@ globalkeys = gears.table.join(
     awful.key({"Shift", "Control"}, "Print", function() awful.util.spawn_with_shell("sleep 0.5 && escrotum -s -C") end),    
     
 -- Spawn Programms
+    awful.key({ modkey,           }, "Return", function () awful.util.spawn_with_shell(env.terminal .. " -e runtmux") end,
+              {description = "open a terminal (with tmux attach)", group = "launcher"}),
+    awful.key({ modkey,  "Control" }, "'", function () awful.util.spawn_with_shell(env.terminal) end,
+              {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey,           }, "b", function () awful.spawn("firefox") end,
               {description = "open a browser", group = "launcher"}),
     -- bad solution, pls change me:
@@ -40,6 +48,17 @@ globalkeys = gears.table.join(
                 awful.spawn(env.terminal)
             end,
               {description = "open floating terminal", group = "launcher"}),
+    awful.key({ modkey,           }, "e", function () awful.spawn("dmenuemoji") end,
+              {description = "select and copy emoji from list", group = "launcher"}),
+
+    awful.key({ modkey }, "v",
+              function ()
+                  myscreen = awful.screen.focused()
+                  myscreen.taskbox.visible = not myscreen.taskbox.visible
+                  myscreen.mywibox.visible = not myscreen.mywibox.visible
+              end,
+              {description = "toggle taskbox", group = "awesome"}
+),
 
         
 --}}}
@@ -140,8 +159,6 @@ globalkeys = gears.table.join(
         {description = "go back", group = "client"}),
 
     -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.spawn(env.terminal) end,
-              {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,

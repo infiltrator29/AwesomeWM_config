@@ -95,7 +95,7 @@ theme.menu_width  = dpi(100)
 theme.taglist_squares_sel   = beautiful.theme_path .. "img/taglist/squarefz.png"
 theme.taglist_squares_unsel = beautiful.theme_path .. "img/taglist/squarez.png"
 theme.taglist_squares_resize = true
-theme.taglist_font = main_font .. "Black 11"
+theme.taglist_font = main_font .. "Black 10"
 -- }}}
 
 -- {{{ Misc

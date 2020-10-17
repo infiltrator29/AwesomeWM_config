@@ -19,13 +19,13 @@ require("awful.hotkeys_popup.keys")
 -- Function to create object in lua - used globally
 -- return the init function of each class
 local function new(self, ...)
-  local instance = setmetatable({}, { __index = self })
-  return instance:init(...) or instance
+    local instance = setmetatable({}, { __index = self })
+    return instance:init(...) or instance
 end
 
 -- Function to create objects in lua - used globally
 function class(base)
-  return setmetatable({ new = new }, { __call = new, __index = base })
+    return setmetatable({ new = new }, { __call = new, __index = base })
 end
 
 -- {{{ Error handling 
@@ -119,7 +119,10 @@ awful.screen.connect_for_each_screen(function(s)
     require("modules.tagnames")(s)
 
     -- Set wibar
-    require("themes.calmwolf.bar")(s)
+    require("themes.solarized.bar")(s)
+    -- Set taskbox
+    require("themes.solarized.taskbox")(s)
+
 
 end)
 -- }}}

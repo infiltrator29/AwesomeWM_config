@@ -1,23 +1,28 @@
 local awful = require("awful")
  
 -- Get screen geometry
-local screen_width = awful.screen.focused().geometry.width
-local screen_height = awful.screen.focused().geometry.height
+local function get_screen_geometry()
+    local screen_width = awful.screen.focused().geometry.width
+    local screen_height = awful.screen.focused().geometry.height
+
+    return screen_width, screen_height
+end
 
 
 
 local helpers = {}
 
 local function in_percent(size, coord)
-  local value = 0
-  -- if x , use width screen
-  if coord == 'x' then
-    value = screen_width / 100 * size
-  -- if y, use height screen
-  else
-    value = screen_height / 100 * size
-  end
-  return value
+    local screen_width, screen_height = get_screen_geometry()
+    local value = 0
+    -- if x , use width screen
+    if coord == 'x' then
+        value = screen_width / 100 * size
+        -- if y, use height screen
+    else
+        value = screen_height / 100 * size
+    end
+    return value
 end
 
 -- Create the gravity system like subtlewm

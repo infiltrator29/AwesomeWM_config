@@ -56,7 +56,7 @@ rules = {
 
      --Set Firefox to always map on the tag named "2" on screen 1.
      { rule = { class = "firefox" },
-       properties = { screen = 1, tag = tagnames[2], switchtotag = true} },
+       properties = { tag = tagnames[2], switchtotag = true} },
 
     -- Spotify map  on the tag named "3".
      { rule = { class = "[Ss]potify" },
@@ -80,6 +80,7 @@ rules = {
              for k,gravity in pairs(helpers.gravity({0, 0, 25, 25})) do
                  c[k] = gravity
              end
+             c:move_to_screen(awful.screen.focused())
              awful.placement.centered(c)
          end
          floating_flag = false
