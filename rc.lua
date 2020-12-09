@@ -60,8 +60,9 @@ end
 
 -- {{{ Variable definitions 
 -- Themes define colours, icons, font and wallpapers.
-local mytheme = require("modules.theme_loader")
-beautiful.init( mytheme("solarized") )
+local themeName = "solarized"
+local theme = require("modules.theme_loader")(themeName)
+
 
 -- {{{ Add some custom stuff
 local env = require("modules.env-configuration")
@@ -110,22 +111,6 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
 
 -- Menubar configuration
 menubar.utils.terminal = env.terminal -- Set the terminal for applications that require it
--- }}}
--- {{{ For each screen 
-awful.screen.connect_for_each_screen(function(s) 
-    -- Wallpaper
-    require("modules.wallpaper")(s)
-
-    -- Set tag names and settings
-    require("modules.tagnames")(s)
-
-    -- Set wibar
-    require("themes.solarized.bar")(s)
-    -- Set taskbox
-    require("themes.solarized.taskbox")(s)
-
-
-end)
 -- }}}
 -- {{{ Rules 
 -- Rules to apply to new clients (through the "manage" signal).
