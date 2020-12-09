@@ -41,6 +41,8 @@ end)
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey,           }, "b", function () awful.spawn("firefox") end,
               {description = "open a browser", group = "launcher"}),
+    awful.key({ modkey,           }, "a", function () awful.spawn("emacs") end,
+              {description = "open an emacs", group = "launcher"}),
     -- bad solution, pls change me:
     awful.key({ modkey, "Shift"}, "Return", function()
                 -- it's first instance od floating_flag

@@ -57,10 +57,11 @@ do
     end)
 end
 -- }}}
+
 -- {{{ Variable definitions 
 -- Themes define colours, icons, font and wallpapers.
 local mytheme = require("modules.theme_loader")
-beautiful.init( mytheme() )
+beautiful.init( mytheme("solarized") )
 
 -- {{{ Add some custom stuff
 local env = require("modules.env-configuration")
@@ -203,6 +204,8 @@ end)
     local current_tag = awful.screen.focused().selected_tag
     awful.screen.focused().padding = tagpadding[current_tag.name]
 -- }}}
+
+    
 -- {{{ Autostart 
 awful.spawn.with_shell("~/.config/awesome/autorun.sh")
 -- }}}

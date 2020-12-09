@@ -37,6 +37,7 @@ function mytagname:init(s)
     gap = 9,
     selected = true,
   })
+
 tagpadding[tagnames[1]] = {left = 80, right = 80, top = 80, bottom = 80}
 
   awful.tag.add(tagnames[2], {
