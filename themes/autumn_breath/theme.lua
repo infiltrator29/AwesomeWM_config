@@ -1,5 +1,5 @@
 -------------------------------------
---    "solarized" awesome theme    --
+--    "autumn breath" awesome theme    --
 --         by infiltrator          --
 -------------------------------------
 
@@ -39,6 +39,7 @@ theme.border_normal = theme.bg_normal
 theme.border_focus  = theme.fg_normal
 theme.border_marked = "#CC9393"
 theme.maximized_hide_border = true
+theme.corner_radius = dpi(15)
 -- }}}
 
 -- {{{ Titlebars

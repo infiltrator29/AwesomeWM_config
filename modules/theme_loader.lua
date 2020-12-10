@@ -29,6 +29,8 @@ function mytheme:init(themeName)
     end)
     -- }}}
 
+    require("modules.round-client")
+
     local loader = "themes.".. themeName ..".loader"
     if helpers.isModule(loader) then
         require(loader)()
