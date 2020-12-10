@@ -11,6 +11,8 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+-- Custom layours and widgets
+local lain = require("lain")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -60,7 +62,7 @@ end
 
 -- {{{ Variable definitions 
 -- Themes define colours, icons, font and wallpapers.
-local themeName = "solarized"
+local themeName = "autumn_breath"
 local theme = require("modules.theme_loader")(themeName)
 
 
@@ -76,6 +78,7 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
+    lain.layout.centerwork,
     awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
@@ -89,6 +92,7 @@ awful.layout.layouts = {
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier,
     awful.layout.suit.corner.nw,
+    lain.layout.centerwork.horizontal,
      --awful.layout.suit.corner.ne,
      --awful.layout.suit.corner.sw,
      --awful.layout.suit.corner.se,

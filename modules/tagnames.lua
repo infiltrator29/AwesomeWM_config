@@ -1,7 +1,7 @@
 local awful = require("awful")
 local gtable = require("gears.table")
 local beautiful = require("beautiful")
-
+local lain = require("lain")
 -- Tag names
 tagnames = beautiful.tagnames or { ">_", " " , " ", " ", " ", "6", "7", "8", " פֿ"}
 
@@ -24,8 +24,8 @@ function mytagname:init(s)
   -- local layouts = { l.max, l.floating, l.max, l.max , l.tile,
   --     l.max, l.max, l.max, l.floating, l.tile}
   local layouts = { 
-    l.tile.left, l.tile, l.max, l.max.fullscreen, l.max.fullscreen,
-    l.tile, l.tile, l.tile, l.tile 
+    lain.layout.centerwork, l.tile, l.max, l.max.fullscreen, l.max.fullscreen,
+    lain.layout.centerwork, lain.layout.centerwork, lain.layout.centerwork, lain.layout.centerwork
   }
 
 
@@ -38,7 +38,7 @@ function mytagname:init(s)
     selected = true,
   })
 
-tagpadding[tagnames[1]] = {left = 80, right = 80, top = 80, bottom = 80}
+tagpadding[tagnames[1]] = {left = 50, right = 50, top = 50, bottom = 50}
 
   awful.tag.add(tagnames[2], {
     layout = layouts[2],
