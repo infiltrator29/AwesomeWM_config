@@ -21,11 +21,11 @@ ctrlkey = "Control"
 globalkeys = gears.table.join(
 
 --{{{ Debugging 
-    awful.key({"Mod4"}, "d", function() awful.spawn.easy_async_with_shell("bash -c 'echo $PATH'", function(stdout, stderr, reason, exit_code)
-    require("naughty").notification { message = stdout..stderr..reason }
-end)
- end),
-    --awful.key({"Mod4"}, "d", function() require("naughty").notify{ text = inspect(helpers.gravity({10, 10, 50, 50}))} end),
+--     awful.key({"Mod4"}, "d", function() awful.spawn.easy_async_with_shell("bash -c 'echo $PATH'", function(stdout, stderr, reason, exit_code)
+--     require("naughty").notification { message = stdout..stderr..reason }
+-- end)
+--  end),
+    awful.key({"Mod4"}, "d", function() require("naughty").notify{ text = inspect(awful.screen.focused().bar:struts())} end),
 --}}}
 
 --{{{ My bindings (custom)
@@ -57,7 +57,7 @@ end)
               function ()
                   myscreen = awful.screen.focused()
                   myscreen.taskbox.visible = not myscreen.taskbox.visible
-                  myscreen.mywibox.visible = not myscreen.mywibox.visible
+                  -- myscreen.mywibox.visible = not myscreen.mywibox.visible
               end,
               {description = "toggle taskbox", group = "awesome"}
 ),

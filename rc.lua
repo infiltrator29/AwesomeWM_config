@@ -1,15 +1,11 @@
 -- {{{ Requirements
 -- Standard awesome library
-local gears = require("gears")
 local awful = require("awful")
 require("awful.autofocus")
--- Widget and layout library
-local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
-local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Custom layours and widgets
 local lain = require("lain")
@@ -62,6 +58,32 @@ end
 
 -- {{{ Variable definitions 
 -- Themes define colours, icons, font and wallpapers.
+local xrdb = beautiful.xresources.get_current_theme()
+-- Make dpi function global
+dpi = beautiful.xresources.apply_dpi
+-- Make xresources colors global
+x = {
+    --           xrdb variable
+    background = xrdb.background,
+    foreground = xrdb.foreground,
+    color0     = xrdb.color0,
+    color1     = xrdb.color1,
+    color2     = xrdb.color2,
+    color3     = xrdb.color3,
+    color4     = xrdb.color4,
+    color5     = xrdb.color5,
+    color6     = xrdb.color6,
+    color7     = xrdb.color7,
+    color8     = xrdb.color8,
+    color9     = xrdb.color9,
+    color10    = xrdb.color10,
+    color11    = xrdb.color11,
+    color12    = xrdb.color12,
+    color13    = xrdb.color13,
+    color14    = xrdb.color14,
+    color15    = xrdb.color15,
+}
+
 local themeName = "autumn_breath"
 local theme = require("modules.theme_loader")(themeName)
 
@@ -69,16 +91,10 @@ local theme = require("modules.theme_loader")(themeName)
 -- {{{ Add some custom stuff
 local env = require("modules.env-configuration")
 local keys = require("modules.keys")
-local rules = require("modules.rules")
 -- }}}
-
-
--- Default modkey (WinKey)
-modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-    lain.layout.centerwork,
     awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
@@ -92,8 +108,9 @@ awful.layout.layouts = {
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier,
     awful.layout.suit.corner.nw,
-    lain.layout.centerwork.horizontal,
-     --awful.layout.suit.corner.ne,
+    lain.layout.centerwork,
+    --lain.layout.centerwork.horizontal,
+    --awful.layout.suit.corner.ne,
      --awful.layout.suit.corner.sw,
      --awful.layout.suit.corner.se,
 }
@@ -112,13 +129,10 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                     { "open terminal", env.terminal }
                                   }
                         })
-
--- Menubar configuration
-menubar.utils.terminal = env.terminal -- Set the terminal for applications that require it
 -- }}}
 -- {{{ Rules 
 -- Rules to apply to new clients (through the "manage" signal).
-awful.rules.rules = rules
+awful.rules.rules = require("modules.rules")
 -- }}}
 -- {{{ Signals 
 -- Signal function to execute when a new client appears.
@@ -133,48 +147,6 @@ client.connect_signal("manage", function (c)
         -- Prevent clients from being unreachable after screen count changes.
         awful.placement.no_offscreen(c)
     end
-end)
-
--- Add a titlebar if titlebars_enabled is set to true in the rules.
-client.connect_signal("request::titlebars", function(c)
-    -- buttons for the titlebar
-    local buttons = gears.table.join(
-        awful.button({ }, 1, function()
-            c:emit_signal("request::activate", "titlebar", {raise = true})
-            awful.mouse.client.move(c)
-        end),
-        awful.button({ }, 3, function()
-            c:emit_signal("request::activate", "titlebar", {raise = true})
-            awful.mouse.client.resize(c)
-        end)
-    )
-
-    awful.titlebar(c) : setup {
-        { -- Left
-            awful.titlebar.widget.iconwidget(c),
-            buttons = buttons,
-            layout  = wibox.layout.fixed.horizontal
-        },
-        { -- Middle
-            { -- Title
-                align  = "center",
-                widget = awful.titlebar.widget.titlewidget(c)
-            },
-            buttons = buttons,
-            layout  = wibox.layout.flex.horizontal
-        },
-        { -- Right
-            awful.titlebar.widget.floatingbutton (c),
-            awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
-            awful.titlebar.widget.closebutton    (c),
-            layout = wibox.layout.fixed.horizontal()
-        },
-        layout = wibox.layout.align.horizontal
-    }
-
-    --awful.titlebar.hide(c)
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.

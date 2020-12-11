@@ -1,7 +1,8 @@
--------------------------------------
---    "autumn breath" awesome theme    --
---         by infiltrator          --
--------------------------------------
+----------------------------------------
+--    "autumn breath" awesome theme   --
+--         by infiltrator             --
+----------------------------------------
+local helpers = require("modules.helpers")
 
 local beautiful = require("beautiful")
 local gears = require("gears")
@@ -13,8 +14,8 @@ local dpi = require("beautiful.xresources").apply_dpi
 
 -- {{{ Main
 local theme = {}
-theme.wallpaper = theme_path .. 'background/wallpaper.jpg'
 theme.solid_background = false
+theme.wallpaper = theme_path .. 'background/wallpaper.jpg'
 -- theme.wallpaper = "~/pix/wallpapers/road.jpg"
 -- }}}
 
@@ -23,11 +24,11 @@ local main_font = "SauceCodePro Nerd Font "
 theme.font      = main_font .. "Black 11"
 
 -- {{{ Colors
-theme.fg_normal  = "#657b83"
+theme.fg_normal  = x.foreground
 theme.fg_focus   = "#93a1a1"
 theme.fg_urgent  = "#CC9393"
-theme.bg_normal  = "#002b36"
-theme.bg_focus   = theme.wallpaper
+theme.bg_normal  = x.background
+theme.bg_focus   = x.color0
 theme.bg_urgent  = "#3F3F3F"
 theme.bg_systray = theme.bg_normal
 -- }}}
@@ -46,6 +47,7 @@ theme.corner_radius = dpi(15)
 theme.titlebar_bg_focus  = "#3F3F3F"
 theme.titlebar_bg_normal = "#3F3F3F"
 -- }}}
+
 
 -- {{{ Useless gaps
 theme.useless_gap = dpi(0)  

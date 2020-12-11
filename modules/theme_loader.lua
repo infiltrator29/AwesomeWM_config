@@ -25,7 +25,6 @@ function mytheme:init(themeName)
             -- Set taskbox
             require("themes.".. themeName ..".taskbox")(s)
 
-
     end)
     -- }}}
 
@@ -37,6 +36,7 @@ function mytheme:init(themeName)
     end
     
     awful.spawn.with_shell("pkill compton;compton --shadow-exclude '!focused'")
+
     return theme 
 end
 

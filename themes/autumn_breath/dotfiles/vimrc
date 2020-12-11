@@ -3,5 +3,5 @@ if filereadable(expand("~/.vimrc_background"))
   source ~/.vimrc_background
 endif
 
-colorscheme base16-default-dark
+colorscheme wpgtkAlt
 let g:airline_theme='base16_default'

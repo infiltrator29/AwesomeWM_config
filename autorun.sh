@@ -10,4 +10,3 @@ function run {
 run 'setxkbmap -layout "pl"'
 run 'setxkbmap -option caps:swapescape'
 run redshift                    # auto adjust screen temperature for night work
-

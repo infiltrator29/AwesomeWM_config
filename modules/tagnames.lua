@@ -3,10 +3,10 @@ local gtable = require("gears.table")
 local beautiful = require("beautiful")
 local lain = require("lain")
 -- Tag names
-tagnames = beautiful.tagnames or { ">_", " " , " ", " ", " ", "6", "7", "8", " פֿ"}
+tagnames = beautiful.tagnames or { ">_", " " , " ", " ", " ", "6", "7", "8", " פֿ" }
 
 -- Screen padding for each tag
-local defaultPadding = {left = 0, right = 0, top = 0, bottom = 0}
+local defaultPadding = {left = 50, right = 50, top = 20, bottom = 50}
 tagpadding = {}
 for _,name in pairs(tagnames) do
    tagpadding[name] = defaultPadding
@@ -38,7 +38,7 @@ function mytagname:init(s)
     selected = true,
   })
 
-tagpadding[tagnames[1]] = {left = 50, right = 50, top = 50, bottom = 50}
+tagpadding[tagnames[1]] = {left = 50, right = 50, top = 20, bottom = 50}
 
   awful.tag.add(tagnames[2], {
     layout = layouts[2],
@@ -47,6 +47,8 @@ tagpadding[tagnames[1]] = {left = 50, right = 50, top = 50, bottom = 50}
     gap_single_client = true,
     master_width_factor = 0.75,
   })
+
+tagpadding[tagnames[2]] = {left = 12, right = 12, top = 0, bottom = 0}
 
   awful.tag.add(tagnames[3], {
     layout = layouts[3],
