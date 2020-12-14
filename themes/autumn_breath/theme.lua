@@ -62,6 +62,10 @@ theme.tasklist_align = "center"
 theme.tasklist_font = main_font .. "Bold 8"
 
 -- }}}
+-- 
+-- {{ Wibar
+theme.wibar_bg = "#282828"
+--}}
 
 -- There are other variable sets
 -- overriding the default one when
@@ -101,7 +105,8 @@ theme.menu_width  = dpi(100)
 theme.taglist_squares_sel   = beautiful.theme_path .. "img/taglist/squarefz.png"
 theme.taglist_squares_unsel = beautiful.theme_path .. "img/taglist/squarez.png"
 theme.taglist_squares_resize = true
-theme.taglist_font = main_font .. "Black 10"
+theme.taglist_font = main_font .. "Mono Black 17"
+theme.taglist_spacing = 5
 -- }}}
 
 -- {{{ Misc

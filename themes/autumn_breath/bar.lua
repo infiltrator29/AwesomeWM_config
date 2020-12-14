@@ -2,6 +2,7 @@ local gears = require("gears")
 local wibox = require("wibox")
 local awful = require("awful")
 local helpers = require("modules.helpers")
+local beautiful = require("beautiful")
 
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
@@ -49,30 +50,34 @@ function mybar:init(s)
 
     -- Add widgets to the wibox
     s.bar:setup {
-        top = dpi(2),
-        bottom = dpi(2),
-        left = dpi(13),
-        right = dpi(13),
-        widget = wibox.container.margin,
+        bg = beautiful.wibar_bg,
+        widget = wibox.container.background,
         {
-            expand = "none",
-            layout = wibox.layout.align.horizontal,
-            { -- Left widgets
-                layout = wibox.layout.fixed.horizontal,
-                --mylauncher, -- It's a awesomewm icon with menu
-                s.mytaglist,
-                s.mypromptbox,
-            },
-            --s.mytasklist, -- Middle widget
-            awful.widget.watch('corona', 900),
-            { -- Right widgets
-                --mybinaryclock,
-                layout = wibox.layout.fixed.horizontal,
-                mykeyboardlayout,
-                wibox.widget.systray(),
-                mytextclock,
-                s.mylayoutbox,
-            },
+            top = dpi(2),
+            bottom = dpi(2),
+            left = dpi(13),
+            right = dpi(13),
+            widget = wibox.container.margin,
+            {
+                expand = "none",
+                layout = wibox.layout.align.horizontal,
+                { -- Left widgets
+                    layout = wibox.layout.fixed.horizontal,
+                    --mylauncher, -- It's a awesomewm icon with menu
+                    s.mytaglist,
+                    s.mypromptbox,
+                },
+                --s.mytasklist, -- Middle widget
+                awful.widget.watch('corona', 900),
+                { -- Right widgets
+                    --mybinaryclock,
+                    layout = wibox.layout.fixed.horizontal,
+                    mykeyboardlayout,
+                    wibox.widget.systray(),
+                    mytextclock,
+                    s.mylayoutbox,
+                },
+            }
         }
     }
 end

@@ -21,11 +21,11 @@ ctrlkey = "Control"
 globalkeys = gears.table.join(
 
 --{{{ Debugging 
---     awful.key({"Mod4"}, "d", function() awful.spawn.easy_async_with_shell("bash -c 'echo $PATH'", function(stdout, stderr, reason, exit_code)
---     require("naughty").notification { message = stdout..stderr..reason }
--- end)
---  end),
-    awful.key({"Mod4"}, "d", function() require("naughty").notify{ text = inspect(awful.screen.focused().bar:struts())} end),
+    awful.key({"Mod4"}, "d", function() awful.spawn.easy_async_with_shell("bash -c 'echo $PATH'", function(stdout, stderr, reason, exit_code)
+    require("naughty").notification { message = stdout..stderr..reason }
+end)
+ end),
+    -- awful.key({"Mod4"}, "d", function() require("naughty").notify{ text = inspect(awful.screen.focused().bar:struts())} end),
 --}}}
 
 --{{{ My bindings (custom)
@@ -50,8 +50,8 @@ globalkeys = gears.table.join(
                 awful.spawn(env.terminal)
             end,
               {description = "open floating terminal", group = "launcher"}),
-    awful.key({ modkey,           }, "e", function () awful.spawn("dmenuemoji") end,
-              {description = "select and copy emoji from list", group = "launcher"}),
+    awful.key({ modkey,           }, "e", function () awful.spawn("rofiemoji") end,
+              {description = "select and copy emoji from the list", group = "launcher"}),
 
     awful.key({ modkey }, "v",
               function ()

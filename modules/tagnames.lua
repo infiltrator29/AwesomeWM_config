@@ -3,7 +3,7 @@ local gtable = require("gears.table")
 local beautiful = require("beautiful")
 local lain = require("lain")
 -- Tag names
-tagnames = beautiful.tagnames or { ">_", " " , " ", " ", " ", "6", "7", "8", " פֿ" }
+tagnames = beautiful.tagnames or { "‎‎", "" , "", "", "", "", "", "", "פֿ" }
 
 -- Screen padding for each tag
 local defaultPadding = {left = 50, right = 50, top = 20, bottom = 50}
