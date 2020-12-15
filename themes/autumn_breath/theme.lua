@@ -44,8 +44,8 @@ theme.corner_radius = dpi(15)
 -- }}}
 
 -- {{{ Titlebars
-theme.titlebar_bg_focus  = "#3F3F3F"
-theme.titlebar_bg_normal = "#3F3F3F"
+theme.titlebar_bg_focus  = x.color1
+theme.titlebar_bg_normal = x.color1
 -- }}}
 
 

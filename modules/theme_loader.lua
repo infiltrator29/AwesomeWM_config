@@ -7,7 +7,10 @@ local helpers = require("modules.helpers")
 local mytheme = class()
 
 function mytheme:init(themeName)
+    local theme = {}
+
     local themePath = gears.filesystem.get_configuration_dir() .. "themes/" .. themeName .. "/" 
+    local themeImPath = "themes." .. themeName .. "."
     awful.spawn.with_shell("xrdb -merge " .. themePath .. "dotfiles/Xresources")
 
     beautiful.init( themePath .. "theme.lua" )
@@ -21,9 +24,9 @@ function mytheme:init(themeName)
             require("modules.tagnames")(s)
 
             -- Set wibar
-            require("themes.".. themeName .. ".bar")(s)
+            require(themeImPath .. "bar")(s)
             -- Set taskbox
-            require("themes.".. themeName ..".taskbox")(s)
+            require(themeImPath .. "taskbox")(s)
 
     end)
     -- }}}
@@ -35,7 +38,10 @@ function mytheme:init(themeName)
         require(loader)()
     end
     
-    awful.spawn.with_shell("pkill compton;compton --shadow-exclude '!focused'")
+    -- awful.spawn.with_shell("pkill compton;compton --shadow-exclude '!focused'")
+    awful.spawn.with_shell("pkill compton;compton ")
+
+    theme.signals = require(themeImPath .. "signals")
 
     return theme 
 end

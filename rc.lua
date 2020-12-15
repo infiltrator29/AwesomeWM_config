@@ -134,7 +134,7 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = require("modules.rules")
 -- }}}
--- {{{ Signals 
+-- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
     -- Set the windows at the slave,
@@ -147,6 +147,8 @@ client.connect_signal("manage", function (c)
         -- Prevent clients from being unreachable after screen count changes.
         awful.placement.no_offscreen(c)
     end
+
+    theme.signals.client.manage(c)
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
@@ -154,8 +156,14 @@ client.connect_signal("mouse::enter", function(c)
     c:emit_signal("request::activate", "mouse_enter", {raise = false})
 end)
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+client.connect_signal("focus", function(c)
+                          c.border_color = beautiful.border_focus
+                          theme.signals.client.focus(c)
+end)
+client.connect_signal("unfocus", function(c)
+                          c.border_color = beautiful.border_normal
+                          theme.signals.client.unfocus(c)
+end)
 
 -- Set screen padding for each tag separatly
 awful.tag.attached_connect_signal(s, "property::selected", function(t)
